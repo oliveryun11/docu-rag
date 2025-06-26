@@ -1,0 +1,24 @@
+{
+  "backup_timestamp": "2025-06-25T17:14:58.527646",
+  "database_url": "sqlite:///./docu_rag.db",
+  "chroma_db_path": "./chroma_db",
+  "upload_dir": "./uploads",
+  "total_documents": 366,
+  "documents_by_status": {
+    "indexed": 366
+  },
+  "total_chunks": 3332,
+  "vector_store": {
+    "collection_name": "documents",
+    "document_count": 3332,
+    "storage_path": "./chroma_db",
+    "status": "connected"
+  },
+  "settings": {
+    "app_name": "DocuRAG Backend",
+    "app_version": "1.0.0",
+    "gemini_model": "gemini-2.0-flash-001",
+    "gemini_embedding_model": "models/text-embedding-004",
+    "chroma_collection_name": "documents"
+  }
+}
