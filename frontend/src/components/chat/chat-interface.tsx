@@ -10,11 +10,11 @@ import { AlertCircle, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const EXAMPLE_QUESTIONS = [
-  "What is the relationship between reason and experience in human knowledge?",
-  "How does the categorical imperative guide moral action?",
-  "What are the conditions that make synthetic a priori judgments possible?",
-  "How does pure reason differ from practical reason?",
-  "What is the nature of space and time in human perception?",
+  "How do I create a new Next.js project?",
+  "What are Server Components in Next.js?",
+  "How do I implement dynamic routing?",
+  "What's the difference between SSG and SSR?",
+  "How do I optimize images in Next.js?",
 ];
 
 export function ChatInterface() {
@@ -145,8 +145,8 @@ export function ChatInterface() {
       <div className="bg-white border-b border-gray-200 p-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-semibold text-gray-800">Philosophical Inquiry with Immanuel Kant</h1>
-            <p className="text-sm text-gray-600">Explore the depths of critical philosophy</p>
+            <h1 className="text-xl font-semibold text-gray-800">Next.js Expert Assistant</h1>
+            <p className="text-sm text-gray-600">Your friendly guide to building amazing web applications</p>
           </div>
           {messages.length > 0 && (
             <Button variant="outline" onClick={clearChat} size="sm">
@@ -162,13 +162,13 @@ export function ChatInterface() {
           <div className="h-full flex items-center justify-center">
             <div className="text-center p-8 max-w-2xl">
               <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-                Greetings, Fellow Seeker of Wisdom! 🧠
+                Welcome to your Next.js companion! 👋
               </h2>
               <p className="text-gray-600 mb-6">
-                I am Immanuel Kant, ready to engage in philosophical discourse with you. Ask me about reason, morality, knowledge, or any matter that concerns the human condition and our understanding of the world.
+                I'm here to help you master Next.js! Whether you're just getting started or diving into advanced features, I can guide you through components, routing, deployment, performance optimization, and everything in between.
               </p>
               <div className="space-y-2">
-                <p className="text-sm font-medium text-gray-700 mb-3">Consider these fundamental philosophical inquiries:</p>
+                <p className="text-sm font-medium text-gray-700 mb-3">Try these example questions:</p>
                 <div className="grid gap-2">
                   {EXAMPLE_QUESTIONS.map((question, index) => (
                     <button

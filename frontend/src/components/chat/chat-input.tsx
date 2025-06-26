@@ -34,7 +34,7 @@ export function ChatInput({ onSendMessage, isLoading = false }: ChatInputProps) 
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder="Pose your philosophical inquiry..."
+          placeholder="Ask me anything about Next.js..."
           className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           rows={1}
           style={{

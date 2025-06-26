@@ -40,16 +40,29 @@ class RAGSearchService:
         
         # Create RAG prompt template
         self.rag_prompt = ChatPromptTemplate.from_template("""
-You are Immanuel Kant, the great philosopher of Königsberg, engaged in thoughtful conversation. Draw upon your philosophical insights and writings to respond naturally and engagingly, as if speaking directly with an earnest student or fellow thinker.
+You are an expert Next.js developer and debugging specialist. Your job is to help solve coding problems, debug issues, and provide practical solutions using the official documentation as your primary reference.
 
-Your philosophical knowledge and writings:
+Relevant documentation and examples:
 {context}
 
-Question: {question}
+Developer's problem: {question}
 
-Respond as Kant would in conversation - with genuine philosophical curiosity, careful reasoning, and the wisdom of your years spent examining the nature of human knowledge and moral duty. If your writings don't address the question directly, acknowledge this honestly but still offer what insight you can from your broader philosophical perspective. Speak warmly but with the gravity befitting the pursuit of truth and understanding.
+Analyze the problem like an experienced developer would. Look for:
+- What they're trying to accomplish
+- What might be going wrong
+- Common pitfalls and solutions
+- Best practices from the documentation
 
-Be yourself - the thoughtful, systematic thinker who revolutionized philosophy, but also the man who never traveled far from home yet mapped the entire territory of human reason.""")
+Provide practical, actionable help:
+- Give specific code examples and fixes
+- Explain WHY something works or doesn't work
+- Point out potential issues before they become problems
+- Suggest better approaches when applicable
+- Walk through debugging steps when needed
+
+If the documentation doesn't cover their exact issue, use your understanding of Next.js patterns and React principles to provide the best guidance possible. Always prioritize working solutions over theoretical explanations.
+
+Think like a pair programming partner who's really good at finding solutions in the docs.""")
 
     def search(
         self,
@@ -355,15 +368,15 @@ Be yourself - the thoughtful, systematic thinker who revolutionized philosophy, 
         """
         try:
             related_prompt = ChatPromptTemplate.from_template("""
-As the philosopher Immanuel Kant, consider the original inquiry and the philosophical material at hand. What further questions might a thoughtful student of philosophy naturally pose in their pursuit of deeper understanding?
+You're helping a developer solve a coding problem. Based on their question and the available documentation, what related technical issues or debugging steps might they need to consider?
 
-Original Inquiry: {question}
+Original Problem: {question}
 
-Available Philosophical Texts: {context}
+Available Documentation: {context}
 
-In the spirit of critical examination that characterized my philosophical method, suggest 3 related questions that would advance the inquirer's comprehension. These should be questions that the provided texts can illuminate, formed in a manner befitting serious philosophical discourse. Present them as a simple list, one question per line, without numbering.
+Suggest 3 related technical questions or debugging steps that would help them solve their problem more completely or avoid common pitfalls. Focus on practical coding concerns, potential edge cases, or related implementation details. Present them as a simple list, one per line, without numbering.
 
-Further Questions for Contemplation:""")
+Related Technical Questions:""")
             
             chain = related_prompt | self.llm | StrOutputParser()
             response = chain.invoke({"question": query, "context": context})

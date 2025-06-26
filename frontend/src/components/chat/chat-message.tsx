@@ -22,7 +22,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
       
       <div className="flex-1 space-y-3">
         <div className="flex items-center gap-2 text-sm text-gray-600">
-          <span className="font-medium">{isUser ? 'You' : 'Kant'}</span>
+          <span className="font-medium">{isUser ? 'You' : 'Assistant'}</span>
           <Clock size={12} />
           <span>{formatRelativeTime(message.timestamp)}</span>
         </div>
