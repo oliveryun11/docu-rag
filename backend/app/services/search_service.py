@@ -40,21 +40,29 @@ class RAGSearchService:
         
         # Create RAG prompt template
         self.rag_prompt = ChatPromptTemplate.from_template("""
-You are a helpful assistant that answers questions based on the provided context from documentation.
+You are an expert Next.js developer and debugging specialist. Your job is to help solve coding problems, debug issues, and provide practical solutions using the official documentation as your primary reference.
 
-Context:
+Relevant documentation and examples:
 {context}
 
-Question: {question}
+Developer's problem: {question}
 
-Instructions:
-1. Answer the question based ONLY on the provided context
-2. If the context doesn't contain enough information to answer the question, say "I don't have enough information in the provided context to answer that question."
-3. Be concise but comprehensive
-4. Include relevant code examples or specifics from the context when applicable
-5. If you reference specific information, mention which document it came from
+Analyze the problem like an experienced developer would. Look for:
+- What they're trying to accomplish
+- What might be going wrong
+- Common pitfalls and solutions
+- Best practices from the documentation
 
-Answer:""")
+Provide practical, actionable help:
+- Give specific code examples and fixes
+- Explain WHY something works or doesn't work
+- Point out potential issues before they become problems
+- Suggest better approaches when applicable
+- Walk through debugging steps when needed
+
+If the documentation doesn't cover their exact issue, use your understanding of Next.js patterns and React principles to provide the best guidance possible. Always prioritize working solutions over theoretical explanations.
+
+Think like a pair programming partner who's really good at finding solutions in the docs.""")
 
     def search(
         self,
@@ -360,15 +368,15 @@ Answer:""")
         """
         try:
             related_prompt = ChatPromptTemplate.from_template("""
-Based on the original question and the provided context, suggest 3 related questions that a user might want to ask.
+You're helping a developer solve a coding problem. Based on their question and the available documentation, what related technical issues or debugging steps might they need to consider?
 
-Original Question: {question}
+Original Problem: {question}
 
-Context: {context}
+Available Documentation: {context}
 
-Generate 3 specific, actionable questions that are related to the original question and can be answered using the provided context. Format as a simple list, one question per line, without numbering.
+Suggest 3 related technical questions or debugging steps that would help them solve their problem more completely or avoid common pitfalls. Focus on practical coding concerns, potential edge cases, or related implementation details. Present them as a simple list, one per line, without numbering.
 
-Related Questions:""")
+Related Technical Questions:""")
             
             chain = related_prompt | self.llm | StrOutputParser()
             response = chain.invoke({"question": query, "context": context})
